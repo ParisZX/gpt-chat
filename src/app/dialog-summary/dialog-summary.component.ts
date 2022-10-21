@@ -9,9 +9,7 @@ const { Configuration, OpenAIApi } = require('openai');
 })
 export class DialogSummaryComponent implements OnInit {
 
-  title = 'chat-gpt3';
-  messages: any = [];
-  currentMessage = '';
+  messages: any = []; currentMessage = '';
 
   configuration = new Configuration({
     apiKey: env.OPENAI_API_KEY
@@ -25,13 +23,9 @@ export class DialogSummaryComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    console.log('ngOnInit');
-  }
+  ngOnInit(): void {}
 
   async sendMessage() {
-    // constrcut the request so that we send a string like `You: ${message[0]}\nFriend: ${message[1]}.\nYou: ${message[2]}?\nFriend:` to the API
-
     const request = {
       model: 'text-davinci-002',
       prompt: `${this.currentMessage}\nSummarize this interaction:`,
@@ -39,10 +33,8 @@ export class DialogSummaryComponent implements OnInit {
       temperature: 0.7,
       top_p: 1,
       frequency_penalty: 0.0,
-      presence_penalty: 0.0,
-      // stop: ['\n', ' user:', ' bot:']
+      presence_penalty: 0.0
     };
-    console.log(request);
 
     // reset the current message
     this.messages.push({
@@ -52,13 +44,10 @@ export class DialogSummaryComponent implements OnInit {
     this.currentMessage = '';
 
     const response = await this.openai.createCompletion(request);
-    console.log(response.data);
 
     this.messages.push({
       content: response.data.choices[0].text,
       sentBy: 'bot'
     });
-
-    console.log(response.data.choices[0].text);
   }
 }
