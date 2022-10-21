@@ -1,4 +1,4 @@
-# ChatGpt3
+# gpt3-angular-chat
 
 A simple chat UI that interacts with the GPT-3 API, built with Angular and Tailwind. It provides two sample interactions, one with a bot answering Computer Science questions, and a second one that summarizes a dialog between a student and a teacher.
 
